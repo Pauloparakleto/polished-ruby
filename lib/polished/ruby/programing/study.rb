@@ -12,7 +12,9 @@ module Polished
         class A
           ENTITIES = [:user, :customer, :admin]
 
-          ENTITIES.each {|entity| define_method(:"#{entity}_name") { "#{entity} name" }}
+          ENTITIES.each {|entity| define_method(:"#{entity}_name") { @customer_name.nil? ? "#{entity} name" : @customer_name }}
+
+          define_method(:set_customer_name){|name| @customer_name = name }
         end
       end
     end
