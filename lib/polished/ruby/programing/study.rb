@@ -7,8 +7,12 @@ module Polished
     module Programing
       module Study
         class Error < StandardError; end
-        # Your code goes here...
-
+        # Understunding how symbols differ from strings
+        # I needed to understund at once how to use Module#define_method
+        # In order to not repeat code lines.
+        # Imagine if we have one hundred entities,
+        # On this way, we need just to add it to the entities array.
+        # No need to add another method. 
         class A
           ENTITIES = [:user, :customer, :admin]
 
