@@ -27,11 +27,11 @@ RSpec.describe Polished::Ruby::Programing::Study::A do
       end
     end
 
-    context 'when set customer_name' do
-      it 'returns Felipe name' do
+    context 'when welcome with arg' do
+      it 'returns welcome Felipe name' do
         klass_a = described_class.new
-        klass_a.set_customer_name('Felipe')
-        expect(klass_a.customer_name).to eq('Felipe')
+
+        expect(klass_a.welcome('Felipe')).to eq('Welcome, Felipe!')
       end
     end
   end
