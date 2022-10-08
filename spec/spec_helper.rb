@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'byebug'
 require "polished/ruby/programing/study"
 
 RSpec.configure do |config|
