@@ -56,6 +56,22 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
   end
 
   #flat_map
+  describe '#flat_map' do
+    context 'when no block is given an enumerator is returned' do
+      it 'returns each element together with its negative value' do
+        array = [1, 2, 3]
+  
+        expect(array.flat_map { |element| [element, -element] }).to eq([1, -1, 2, -2, 3, -3])
+      end
+    end
+
+    context 'when wanting to extract some element from an array of an array' do
+      it 'returns only the last element in a new array' do
+        array_of_array = [[1, 2], [3, 4]]
+        expect(array_of_array.flat_map { |element_array| element_array.last}).to eq([2, 4])
+      end
+    end
+  end
   #Set core class
   #lambda sample
   #Proc Sample
