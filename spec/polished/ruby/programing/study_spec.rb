@@ -55,6 +55,11 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
     end
   end
 
+  #flat_map
+  #Set core class
+  #lambda sample
+  #Proc Sample
+  #array intersection [] & [] sample
   describe '#lookup' do
     it 'returns only artist stored in memory database' do
       expect(described_class.new.search('Artist 0')).to be_truthy

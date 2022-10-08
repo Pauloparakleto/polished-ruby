@@ -31,13 +31,8 @@ module Polished
                 ["Album #{i}", j, "Artist #{j}"]
               end
             end
-            @albun_artists = {}
+            @albun_artists = Set.new(@albun_infos.flat_map(&:last))
             @albun_track_artists = {}
-            @albun_infos.each do |album, track, artist|
-              (@albun_artists[album] ||= []) << artist
-              (@albun_track_artists[[album, track]] ||= []) << artist
-            end
-            @albun_artists.each_value(&:uniq!)
           end
 
           # array intersection 
