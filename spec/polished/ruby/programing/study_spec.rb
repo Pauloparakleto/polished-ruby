@@ -36,3 +36,28 @@ RSpec.describe Polished::Ruby::Programing::Study::A do
     end
   end
 end
+
+# Implementing an in-memory database
+RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
+  describe '#initialize' do
+    it 'is true' do
+      expect(described_class.new).to be_truthy
+    end
+  end
+
+  describe '#albun_artists' do
+    it 'is truthy' do
+      expect(described_class.new.albun_artists).to be_truthy
+    end
+
+    it 'is truthy' do
+      expect(described_class.new.albun_track_artists).to be_truthy
+    end
+  end
+
+  describe '#lookup' do
+    it 'returns only artist stored in memory database' do
+      expect(described_class.new.search('Artist 0')).to be_truthy
+    end
+  end
+end
