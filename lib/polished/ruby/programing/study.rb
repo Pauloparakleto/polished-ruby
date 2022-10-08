@@ -21,6 +21,35 @@ module Polished
           define_method(:set_customer_name){|name| @customer_name = name }
           define_method(:welcome){|name| 'Welcome, ' + name + '!'}
         end
+
+        class InMemoryDatabase
+          attr_accessor :albun_artists, :albun_track_artists
+
+          def initialize
+            @albun_infos =  100.times.flat_map do |i|
+              10.times.map do |j|
+                ["Album #{i}", j, "Artist #{j}"]
+              end
+            end
+            @albun_artists = {}
+            @albun_track_artists = {}
+            @albun_infos.each do |album, track, artist|
+              (@albun_artists[album] ||= []) << artist
+              (@albun_track_artists[[album, track]] ||= []) << artist
+            end
+            @albun_artists.each_value(&:uniq!)
+          end
+
+          # array intersection 
+          # lambda examples
+
+          def search(artist)
+            lookup = ->(artist) do
+              albun_artists && artist
+            end
+            lookup.call(artist)
+          end
+        end
       end
     end
   end
