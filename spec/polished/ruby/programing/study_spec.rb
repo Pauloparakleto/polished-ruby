@@ -73,6 +73,38 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
     end
   end
   #Set core class
+  # yield keyword
+  describe '#yield' do
+    context 'when called once' do
+      def print_once
+        yield
+      end
+
+      it 'execute anything inside the block' do
+        result = 'the block will be called by yield'
+        expect(print_once { result }).to eq(result)
+      end
+    end
+
+    context 'when called twice' do
+      def once_twice_time_human_modifier(index)
+        return 'once' if index.eql?(1)
+        return 'twice' if index.eql?(2)
+        
+        'times'
+      end
+
+      def print_twice
+        block_given_twice = [yield, yield]
+        block_given_twice.map!.with_index(offset=1){ |message, index| message + ' ' + once_twice_time_human_modifier(index) }
+      end
+
+      it 'execute anything inside the block' do
+        result = 'the block will be called by yield'
+        expect(print_twice { result }).to eq(['the block will be called by yield once', 'the block will be called by yield twice'])
+      end
+    end
+  end
   #lambda sample
   #Proc Sample
   #array intersection [] & [] sample
