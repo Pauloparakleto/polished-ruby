@@ -110,13 +110,15 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
     context 'without argument' do
       it 'says something I do not know' do
         my_lambda = -> { 'Say something I do not know' }
-          expect(my_lambda.call).to eq('Say something I do not know')
+
+        expect(my_lambda.call).to eq('Say something I do not know')
       end
     end
 
     context 'with correct number of arguments given' do
       it 'double number' do
         times_two = -> (number){ number * 2 }
+
         expect(times_two.call(5)).to eq(10)
       end
     end
@@ -124,11 +126,39 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
     context 'with wrong number of arguments given' do
       it 'raises ArgumentError with specific message' do
         times_two = -> (number){ number * 2 }
+
         expect{times_two.call}.to raise_error(ArgumentError, 'wrong number of arguments (given 0, expected 1)')
       end
     end
   end
   #Proc Sample
+  describe '#Proc' do
+    context 'without argument' do
+      it 'says Proc does not care about argument' do
+        my_proc = Proc.new { |name| 'Proc does not care about argument' }
+
+          expect(my_proc.call).to eq('Proc does not care about argument')
+      end
+    end
+
+    context 'with correct number of arguments given' do
+      it 'double number' do
+        proc_times_two = Proc.new { |number| number * 2 }
+
+        expect(proc_times_two.call(5)).to eq(10)
+      end
+    end
+
+    context 'with wrong number of arguments given' do
+      it 'does not raise ArgumentError with specific message' do
+        proc_times_two = Proc.new { |number| number * 2 }
+
+        expect{ proc_times_two.call }.not_to raise_error(ArgumentError, 'wrong number of arguments (given 0, expected 1)')
+        expect{ proc_times_two.call }.to raise_error(NoMethodError, "undefined method `*' for nil:NilClass")
+      end
+    end
+  end
+
   #array intersection [] & [] sample
   describe '#lookup' do
     it 'returns only artist stored in memory database' do
