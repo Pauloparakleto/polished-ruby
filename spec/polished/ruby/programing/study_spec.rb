@@ -106,6 +106,28 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
     end
   end
   #lambda sample
+  describe '#lambda' do
+    context 'without argument' do
+      it 'says something I do not know' do
+        my_lambda = -> { 'Say something I do not know' }
+          expect(my_lambda.call).to eq('Say something I do not know')
+      end
+    end
+
+    context 'with correct number of arguments given' do
+      it 'double number' do
+        times_two = -> (number){ number * 2 }
+        expect(times_two.call(5)).to eq(10)
+      end
+    end
+
+    context 'with wrong number of arguments given' do
+      it 'raises ArgumentError with specific message' do
+        times_two = -> (number){ number * 2 }
+        expect{times_two.call}.to raise_error(ArgumentError, 'wrong number of arguments (given 0, expected 1)')
+      end
+    end
+  end
   #Proc Sample
   #array intersection [] & [] sample
   describe '#lookup' do
