@@ -130,6 +130,14 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
         expect{times_two.call}.to raise_error(ArgumentError, 'wrong number of arguments (given 0, expected 1)')
       end
     end
+
+    context 'when the return keyword is used' do
+      it 'returns 1' do
+        my_lambda = -> { return 1 }
+
+        expect(my_lambda.call).to eq(1)
+      end
+    end
   end
   #Proc Sample
   describe '#Proc' do
@@ -155,6 +163,31 @@ RSpec.describe Polished::Ruby::Programing::Study::InMemoryDatabase do
 
         expect{ proc_times_two.call }.not_to raise_error(ArgumentError, 'wrong number of arguments (given 0, expected 1)')
         expect{ proc_times_two.call }.to raise_error(NoMethodError, "undefined method `*' for nil:NilClass")
+      end
+    end
+
+    context 'when the return keyword is used' do
+      my_proc = Proc.new { return 1 }
+
+      it 'returns 1' do
+        expect{my_proc.call}.to raise_error(LocalJumpError, 'unexpected return')
+      end
+
+      context 'and it is inside a method' do
+        def return_proc_inside_method
+          'first return'
+          my_proc = Proc.new { return 2 }
+          my_proc.call
+          'second return'
+        end
+  
+        it 'returns 2' do
+          expect(return_proc_inside_method).to eq(2)
+        end
+
+        it 'does not returns second return string' do
+          expect(return_proc_inside_method).not_to eq('second return')
+        end
       end
     end
   end
